@@ -1,15 +1,14 @@
 # @hybrid/ui-system
 
-Unified UI system for Hybrid CI/CD platform combining theme configuration and microcomponents.
+MUI Theme configuration for Hybrid CI/CD platform. Provides dark mode, semantic colors, and component overrides for all MUI components across projects.
 
 ## Features
 
-- 🎨 **Theme System**: MUI-based dark/light theme with semantic colors
-- 🧩 **Microcomponents**: 11 reusable atomic components
-- 📱 **Responsive**: Mobile-first responsive design
-- ♿ **Accessible**: WCAG AA compliance built-in
-- 🧪 **Fully Tested**: Vitest + Cypress component tests + Storybook stories
-- 📦 **Zero Dependencies**: Uses only MUI and React (peer dependencies)
+- 🎨 **Dark Mode Theme**: MUI-based dark theme with semantic colors
+- 🎯 **Component Overrides**: Consistent styling for all MUI components (buttons, fields, cards, etc.)
+- 🌈 **Semantic Colors**: Success, warning, error, info palettes
+- 📝 **Typography**: Consistent font family and sizing
+- 📦 **Lightweight**: Just theme, no component dependencies
 
 ## Installation
 
@@ -21,7 +20,7 @@ pnpm add @hybrid/ui-system
 
 ## Quick Start
 
-### Theme Setup
+### Setup
 
 ```tsx
 import { ThemeProvider } from '@mui/material/styles';
@@ -36,62 +35,58 @@ export default function App() {
 }
 ```
 
-### Using Microcomponents
+### Using MUI Components
+
+All MUI components automatically inherit the theme:
 
 ```tsx
-import {
-  LoadingSpinner,
-  StatusIndicator,
-  ConfigCard,
-  ToolBadge,
-  PluginCard,
-} from '@hybrid/ui-system';
+import { Button, Card, CardContent, Typography, Box } from '@mui/material';
 
 export function Dashboard() {
   return (
-    <>
-      {isLoading && <LoadingSpinner />}
-      <StatusIndicator status="healthy" pulse />
-      <ConfigCard title="Settings" description="App configuration" />
-      <ToolBadge name="GitHub" category="ci" verified />
-      <PluginCard plugin={pluginData} />
-    </>
+    <Box sx={{ p: 2 }}>
+      <Card>
+        <CardContent>
+          <Typography variant="h6">Dashboard</Typography>
+          <Button variant="contained">Action</Button>
+        </CardContent>
+      </Card>
+    </Box>
   );
 }
 ```
 
-## Microcomponents
+**Theme automatically styles**: Button colors, Card backgrounds, Typography colors, all form fields, AppBar, Drawer, Table, Dialog, etc.
 
-| Component | Purpose | Use Case |
-|-----------|---------|----------|
-| **LoadingSpinner** | Async operation indicator | Show while fetching data |
-| **StatusIndicator** | Status visualization | Health check, real-time status |
-| **StatusCard** | Metric display | Dashboard KPI cards |
-| **ConfigCard** | Configuration display | Settings, properties |
-| **PluginCard** | Plugin information | Plugin marketplace, registry |
-| **ToolBadge** | Tool status badge | Tool integrations |
-| **PluginPermissions** | Permission matrix | Manage permissions |
-| **SandboxPreview** | Iframe preview | Safe content preview |
-| **RealTimeStatusBadge** | Real-time status chip | Live status updates |
-| **ComingSoonCard** | Feature placeholder | Future features |
-| **DemoModeToggle** | Feature flag toggle | Demo mode toggle |
+## Theme Details
 
-## Theming Strategy
+### Palette
 
-### Phase 1: Current (Active)
-- Use MUI components directly with `@hybrid/ui-system` theme applied
-- Apply theme tokens via `sx` props
-- Custom microcomponents for animations + business logic
+**Colors**:
+- `primary`: #1976d2 (blue)
+- `secondary`: #dc004e (pink)
+- `success`: #4caf50 (green)
+- `warning`: #ff9800 (orange)
+- `error`: #f44336 (red)
+- `info`: #2196f3 (cyan)
+- Background: #0d1117 (dark gray)
+- Text: #e6edf3 (light gray)
 
-### Phase 2: Future
-- Comprehensive theming audit
-- Ensure consistent theme token usage
-- Document customization points
+### Typography
 
-### Phase 3: Optional Enhancement
-- Golden ratio (φ ≈ 1.618) sizing scale
-- Mathematically harmonious spacing
-- Experimental, requires A/B testing
+- Font Family: System fonts (-apple-system, BlinkMacSystemFont, Segoe UI, Roboto)
+- Headings: h1-h6 with font weights 600-700
+- Body: body1 (primary text), body2 (secondary text)
+- Sizes: Responsive from 0.875rem to 2.5rem
+
+### Component Overrides
+
+All MUI components are styled:
+- Button: No text transform, 600 font weight
+- Paper/Card: No background image
+- AppBar, List, Menu, Dialog, Drawer, Table: Color-mapped
+- TextField, Input: Border and focus colors
+- Chip, Badge, Icon: Semantic color mapping
 
 ## File Structure
 
@@ -99,101 +94,12 @@ export function Dashboard() {
 src/
 ├── theme/
 │   ├── index.ts          # Theme exports
-│   ├── hybridTheme.ts    # MUI theme configuration
-│   └── types.ts          # TypeScript types
+│   └── hybridTheme.ts    # MUI theme configuration
 │
-├── components/
-│   ├── LoadingSpinner/
-│   ├── StatusIndicator/
-│   ├── ConfigCard/
-│   ├── PluginCard/
-│   ├── ToolBadge/
-│   ├── PluginPermissions/
-│   ├── SandboxPreview/
-│   ├── RealTimeStatusBadge/
-│   ├── ComingSoonCard/
-│   ├── DemoModeToggle/
-│   └── StatusCard/
-│
-└── index.ts              # Main export file
-```
-
-## Component Examples
-
-### LoadingSpinner
-
-```tsx
-import { LoadingSpinner } from '@hybrid/ui-system';
-
-export function DataFetch() {
-  const [loading, setLoading] = useState(true);
-  
-  return (
-    <>
-      {loading && <LoadingSpinner />}
-    </>
-  );
-}
-```
-
-### StatusIndicator
-
-```tsx
-import { StatusIndicator } from '@hybrid/ui-system';
-
-export function HealthCheck() {
-  return (
-    <StatusIndicator 
-      status="healthy"     // 'healthy' | 'degraded' | 'unhealthy'
-      size="medium"        // 'small' | 'medium' | 'large'
-      pulse={true}         // Optional animation
-    />
-  );
-}
-```
-
-### ConfigCard
-
-```tsx
-import { ConfigCard } from '@hybrid/ui-system';
-
-export function Settings() {
-  return (
-    <ConfigCard 
-      title="Database Configuration"
-      description="Connection settings for primary database"
-      icon={<DatabaseIcon />}
-    >
-      {/* Content */}
-    </ConfigCard>
-  );
-}
+└── index.ts              # Main export
 ```
 
 ## Development
-
-### Running Tests
-
-```bash
-# Unit tests
-npm run test
-
-# Watch mode
-npm run test -- --watch
-
-# Coverage
-npm run test -- --coverage
-```
-
-### Storybook
-
-```bash
-# Start Storybook
-npm run storybook
-
-# Build static site
-npm run build:storybook
-```
 
 ### Building
 
@@ -201,11 +107,17 @@ npm run build:storybook
 npm run build
 ```
 
+### Watch Mode
+
+```bash
+npm run dev
+```
+
 ## Contributing
 
 1. Create a feature branch
-2. Add component (`.tsx` + `.stories.tsx` + `.test.tsx` + `.cy.tsx`)
-3. Write tests (RED phase → GREEN phase)
+2. Update theme configuration in `src/theme/hybridTheme.ts`
+3. Build and test locally
 4. Submit PR
 
 ## License
