@@ -1,0 +1,47 @@
+{
+  "name": "@hybrid/ui-system",
+  "version": "1.0.0",
+  "description": "Unified UI system for Hybrid CI/CD platform - Theme + MicroComponents",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "vitest",
+    "storybook": "storybook dev -p 6006",
+    "build:storybook": "storybook build"
+  },
+  "keywords": [
+    "ui",
+    "theme",
+    "components",
+    "microcomponents",
+    "mui",
+    "react"
+  ],
+  "author": "Hybrid Team",
+  "license": "MIT",
+  "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
+    "@mui/material": "^7.3.5",
+    "@mui/icons-material": "^7.3.5",
+    "lucide-react": "^0.263.1"
+  },
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@types/node": "^20",
+    "typescript": "^5",
+    "vitest": "^1.0.0",
+    "@storybook/react": "^8.0.0",
+    "@storybook/addon-essentials": "^8.0.0"
+  }
+}
